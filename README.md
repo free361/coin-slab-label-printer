@@ -6,11 +6,26 @@
 
 页面固定在一屏里。左边填写，上面有两张小标签：左边一张写每个空的名字，右边一张是正在填的字。右边是已经录入的列表。字多了只在自己的框里滚动。
 
+## 需要安装的软件
+
+这个工具在 **Windows** 上使用。打开它靠的是 `启动标签工具.bat`，这个文件只在 Windows 里能双击运行。
+
+要装的只有下面两样，不用再装别的编程软件。
+
+1. **Python 3.7 或更高版本。**  
+   程序用了 Python 3.7 才有的本机网页功能，所以 3.7 以下不行，Python 2 也不行。  
+   打开 https://www.python.org/downloads/ ，下载 Windows 安装包。页面上的最新正式版都比 3.7 新，选它即可。  
+   安装时，第一页一定要勾选 **Add python.exe to PATH**（有的安装包写成 Add Python to PATH）。不勾的话，后面双击打不开。  
+   **不用 pip 安装任何包。** 程序只用 Python 自带的功能，没有第三方库。装完 Python 就够了，不要再运行 `pip install`。
+
+2. **浏览器：Microsoft Edge 或 Google Chrome。**  
+   Windows 一般已经带了 Edge，可以直接用。没有的话，安装 Edge 或 Chrome 其中一个。
+
+装好这两样之后，再按下一节打开。
+
 ## 在 Windows 上怎么打开
 
-电脑需要已经安装 Python。安装时要勾选 “Add python.exe to PATH”。可以从 https://www.python.org/downloads/ 下载。
-
-请用 Edge 或 Chrome。不要直接双击 `index.html`。那样不能保存，录入的钱币会丢。
+先确认上一节的 Python 和浏览器已经装好。不要直接双击 `index.html`。那样不能保存，录入的钱币会丢。
 
 程序到 `server.py` 旁边找一个叫 `web` 的文件夹，并从那里打开网页。字体要放在 `web\fonts\ctlishu.ttf`。这个仓库下载下来时，页面文件和字体还跟 `server.py` 放在同一层，还没有这两个文件夹。不先放好，双击后黑窗口会说找不到 `web` 文件夹，然后退出。
 
@@ -30,7 +45,7 @@
 
 这个地址只在你自己的电脑上能打开。如果工具已经开着，再双击一次，只会把网页再打开，不会开第二个。
 
-黑窗口如果写着 `Python was not found`，就是还没装 Python，或者安装时没有勾选加入 PATH。
+黑窗口如果写着 `Python was not found`，就是还没装 Python，或者安装时没有勾选 Add python.exe to PATH。回到上面「需要安装的软件」重装一次。
 
 ## 页面上能做什么
 
@@ -131,7 +146,7 @@
 ## 常见问题
 
 **网页打不开。**  
-看黑窗口里的字。如果写找不到 `web` 文件夹，按上面的步骤把 `index.html`、`app.js`、`style.css` 放进 `web`。如果写 `Python was not found`，先安装 Python，并勾选加入 PATH。地址是 `http://127.0.0.1:8765`。
+看黑窗口里的字。如果写找不到 `web` 文件夹，按上面的步骤把 `index.html`、`app.js`、`style.css` 放进 `web`。如果写 `Python was not found`，按「需要安装的软件」安装 Python 3.7 或更高版本，并勾选 Add python.exe to PATH。不用 pip 安装任何包。地址是 `http://127.0.0.1:8765`。
 
 **标签底是白的。**  
 打印时没有勾「背景图形」。
