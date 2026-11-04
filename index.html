@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>钱币鉴定盒标签</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-edit">
+  <div id="error-bar" class="error-bar" hidden></div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="seal" aria-hidden="true">鉴</div>
+      <div>
+        <h1>钱币鉴定盒标签</h1>
+        <p>左边填一条钱币，右边勾上要印的，程序会自动排到 A4 纸上。</p>
+      </div>
+    </div>
+    <div id="save-state" class="save-state">正在读取已保存的钱币…</div>
+  </header>
+
+  <main id="editor" class="editor">
+    <section class="card form-card">
+      <h2>填写一条</h2>
+      <div class="preview-block">
+        <div class="sample-row">
+          <div class="sample">
+            <p class="sample-cap">字段名</p>
+            <div class="live-slot">
+              <div id="legend-label" class="live-scale"></div>
+            </div>
+          </div>
+          <div class="sample">
+            <p class="sample-cap">实际内容</p>
+            <div class="live-slot">
+              <div id="live-label" class="live-scale"></div>
+            </div>
+          </div>
+        </div>
+        <p id="clip-note" class="warn" hidden>有字太长，标签里放不下。请写短一点。</p>
+      </div>
+
+      <div id="edit-banner" class="banner" hidden>
+        <span>正在修改：<strong id="edit-name"></strong></span>
+        <button type="button" id="btn-cancel-edit" class="btn btn-small">取消修改</button>
+      </div>
+
+      <form id="form-coin" class="coin-form" autocomplete="off" spellcheck="false">
+        <div class="form-scroll">
+          <div class="field-table">
+            <div class="field-row">
+              <label for="f-name">钱币名称</label>
+              <div class="cell"><input id="f-name" name="coin-name" placeholder="例如：郡国五铢" required></div>
+              <label for="f-feature">版别</label>
+              <div class="cell"><input id="f-feature" placeholder="例如：穿上横文"></div>
+            </div>
+            <div class="field-row">
+              <label for="f-dynasty">朝代</label>
+              <div class="cell"><input id="f-dynasty" placeholder="例如：西汉"></div>
+              <label for="f-year">公元年</label>
+              <div class="cell"><input id="f-year" placeholder="例如：前118年"></div>
+            </div>
+            <div class="field-row">
+              <label for="f-code">性质</label>
+              <div class="cell"><input id="f-code" placeholder="例如：一型-郡守十四-114"></div>
+              <label for="f-serial">编号</label>
+              <div class="cell"><input id="f-serial" inputmode="numeric" placeholder="不填就自动生成，不会重复"></div>
+            </div>
+            <div class="field-row three">
+              <label for="f-diameter">直径</label>
+              <div class="cell"><input id="f-diameter" inputmode="decimal" placeholder="毫米，如 25.5"></div>
+              <label for="f-thickness">厚度</label>
+              <div class="cell"><input id="f-thickness" inputmode="decimal" placeholder="毫米，如 1.9"></div>
+              <label for="f-weight">重量</label>
+              <div class="cell"><input id="f-weight" inputmode="decimal" placeholder="克，如 4.1"></div>
+            </div>
+            <div class="field-row one">
+              <label for="f-era">铸造年代</label>
+              <div class="cell"><input id="f-era" placeholder="例如：汉武帝元狩五年至元鼎二年"></div>
+            </div>
+            <div class="field-row one">
+              <label for="f-note">备注</label>
+              <div class="cell"><input id="f-note" placeholder="只自己看，不印在标签上"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-foot">
+          <label class="check keep-check">
+            <input id="keep-series" type="checkbox" checked>
+            保存后保留本条数据，方便录下一条
+          </label>
+          <div class="form-actions">
+            <button type="submit" id="btn-save" class="btn btn-primary">保存这条</button>
+            <button type="button" id="btn-clear" class="btn">清空</button>
+          </div>
+        </div>
+      </form>
+
+    </section>
+
+    <section class="card list-card">
+      <div class="list-head">
+        <h2>已录入的钱币</h2>
+        <input id="search" type="search" placeholder="搜索名称、编号、性质、版别">
+      </div>
+      <div class="filters" role="tablist">
+        <button type="button" class="chip active" data-filter="all">全部</button>
+        <button type="button" class="chip" data-filter="todo">未打印</button>
+        <button type="button" class="chip" data-filter="done">已打印</button>
+      </div>
+      <ul id="list" class="coin-list"></ul>
+      <div class="list-foot">
+      <p id="summary" class="summary"></p>
+      <div class="toolbar">
+        <button type="button" id="btn-all" class="btn btn-small">全选</button>
+        <button type="button" id="btn-none" class="btn btn-small">全不选</button>
+        <button type="button" id="btn-todo" class="btn btn-small">勾上未打印的</button>
+        <button type="button" id="btn-preview" class="btn btn-primary" disabled>看排版并打印</button>
+      </div>
+      <div class="toolbar secondary">
+        <button type="button" id="btn-mark-done" class="btn btn-small">把选中的标成已打印</button>
+        <button type="button" id="btn-mark-undo" class="btn btn-small">标成未打印</button>
+        <button type="button" id="btn-delete" class="btn btn-small danger">删除选中</button>
+        <button type="button" id="btn-export" class="btn btn-small">下载备份</button>
+        <button type="button" id="btn-import" class="btn btn-small">从备份恢复</button>
+        <input id="file-import" type="file" accept="application/json,.json" hidden>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="preview" class="preview" hidden>
+    <aside class="preview-side no-print">
+      <div class="preview-toolbar">
+        <button type="button" id="btn-back" class="btn">返回修改</button>
+        <label>标签间距
+          <select id="gap">
+            <option value="2">省纸，间距 2 毫米</option>
+            <option value="3">好裁，间距 3 毫米</option>
+            <option value="4">宽松，间距 4 毫米</option>
+          </select>
+        </label>
+        <label class="check"><input id="cut" type="checkbox" checked> 显示裁切边框</label>
+        <button type="button" id="btn-print" class="btn btn-primary">开始打印</button>
+      </div>
+      <p id="preview-meta" class="summary"></p>
+      <div class="tip">
+        <strong>打印窗口里请这样设，不然会印歪或印出白边被切掉：</strong>
+        <ol>
+          <li>纸张选 A4，方向选纵向</li>
+          <li>边距选「无」</li>
+          <li>缩放选 100%，不要选「适合页面」</li>
+          <li>勾选「背景图形」，不然标签底色印不出来</li>
+          <li>取消「页眉和页脚」，免得页码压住标签</li>
+        </ol>
+        <p>右边这张是竖着的 A4。外圈细线是下刀的位置。打印出来只有这张纸，屏幕上的按钮和图标不会印上去。</p>
+      </div>
+    </aside>
+    <div id="preview-stage"></div>
+  </section>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

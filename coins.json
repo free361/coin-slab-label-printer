@@ -1,0 +1,50 @@
+[
+  {
+    "id": "c_mw20l41hsahd83",
+    "name": "明道元宝",
+    "dynasty": "北宋",
+    "feature": "正字阔缘大样",
+    "code": "新北铜1004 七级",
+    "serial": "2611040001",
+    "diameter": "26.0",
+    "thickness": "1.5",
+    "weight": "5.3",
+    "era": "宋仁宗明道年",
+    "year": "公元1032-1033年",
+    "note": "",
+    "printed": true,
+    "createdAt": "2026-11-04T11:09:22.229Z"
+  },
+  {
+    "id": "c_sample_114",
+    "name": "郡国五铢",
+    "dynasty": "西汉",
+    "feature": "穿上横文",
+    "code": "一型-郡守十四-114",
+    "serial": "2610300114",
+    "diameter": "25.5",
+    "thickness": "1.9",
+    "weight": "4.1",
+    "era": "汉武帝元狩五年至元鼎二年",
+    "year": "前118年前115年",
+    "note": "示例。来自 docs/五铢-114.psd，可以修改或删除。",
+    "printed": false,
+    "createdAt": "2026-10-30T12:00:00"
+  },
+  {
+    "id": "c_sample_261",
+    "name": "郡国五铢",
+    "dynasty": "西汉",
+    "feature": "三型一式宽字",
+    "code": "郡守三十二-261",
+    "serial": "2610300261",
+    "diameter": "26.2",
+    "thickness": "1.6",
+    "weight": "3.4",
+    "era": "汉武帝元狩五年至元鼎二年",
+    "year": "前118年前115年",
+    "note": "示例。来自 docs/整体排版.psd 里重复的那张，打印前请核对文字。",
+    "printed": false,
+    "createdAt": "2026-10-30T12:00:01"
+  }
+]
